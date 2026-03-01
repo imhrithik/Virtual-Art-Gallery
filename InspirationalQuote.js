@@ -1,33 +1,36 @@
-import React, { useState } from 'react';
+// Lightweight vanilla quote widget — data moved to data.js
+import { quotes } from './data.js';
 
-const InspirationalQuote = () => {
-  const quotes = [
-    "The only way to do great work is to love what you do. - Steve Jobs",
-    "In the middle of difficulty lies opportunity. - Albert Einstein",
-    "Believe you can and you're halfway there. - Theodore Roosevelt",
-    "It does not matter how slowly you go as long as you do not stop. - Confucius",
-    "The future belongs to those who believe in the beauty of their dreams. - Eleanor Roosevelt",
-    "Success is not final, failure is not fatal: It is the courage to continue that counts. - Winston Churchill",
-    "The only limit to our realization of tomorrow will be our doubts of today. - Franklin D. Roosevelt",
-    "You are never too old to set another goal or to dream a new dream. - C.S. Lewis",
-    "You miss 100% of the shots you don’t take. - Wayne Gretzky",
-    "The best time to plant a tree was 20 years ago. The second best time is now. - Chinese Proverb"
-  ];
+function getRandom() {
+  return quotes[Math.floor(Math.random() * quotes.length)];
+}
 
-  const [quote, setQuote] = useState(quotes[0]);
-
-  const generateQuote = () => {
-    const randomIndex = Math.floor(Math.random() * quotes.length);
-    setQuote(quotes[randomIndex]);
-  };
-
-  return (
-    <div>
-      <h2>Inspirational Quote of the Day</h2>
-      <p>{quote}</p>
-      <button onClick={generateQuote}>Generate New Quote</button>
+function render(container){
+  // Show the classic proverb first for a predictable initial state
+  const initial = quotes[9] || getRandom();
+  container.innerHTML = `
+    <div class="quote-card" role="region" aria-label="Inspirational Quote">
+      <div>
+        <p class="quote-text">${initial.quote}</p>
+        <p class="quote-author">— ${initial.author}</p>
+      </div>
+      <button class="quote-btn" aria-label="New quote">New Quote</button>
     </div>
-  );
-};
+  `;
+  const btn = container.querySelector('.quote-btn');
+  const text = container.querySelector('.quote-text');
+  const author = container.querySelector('.quote-author');
+  btn.addEventListener('click', ()=>{ 
+    const next = getRandom();
+    text.textContent = next.quote;
+    author.textContent = `— ${next.author}`;
+    btn.blur();
+  });
+}
 
-export default InspirationalQuote;
+document.addEventListener('DOMContentLoaded', ()=>{
+  const el = document.getElementById('quote-widget');
+  if(el) render(el);
+});
+
+export { render as initQuote };
