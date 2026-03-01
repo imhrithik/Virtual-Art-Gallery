@@ -5,7 +5,7 @@ export const artworks = [
     title: "Artwork Title 1",
     artist: "Mathew",
     description: "A vibrant abstract exploration of color and motion.",
-    src: "artwork1.jpg",
+    src: "public/artwork1.jpg",
     alt: "Abstract swirls of color",
   },
   {
@@ -13,7 +13,7 @@ export const artworks = [
     title: "Artwork Title 2",
     artist: "McLellan",
     description: "A serene landscape captured with minimalist strokes.",
-    src: "artwork2.jpg",
+    src: "public/artwork2.jpg",
     alt: "Minimalist landscape",
   },
   {
@@ -22,7 +22,7 @@ export const artworks = [
     artist: "NASA",
     description:
       "A science-themed piece combining imagery and data visualization.",
-    src: "artwork3.jpg",
+    src: "public/artwork3.jpg",
     alt: "Space-inspired visualization",
   },
 ];
